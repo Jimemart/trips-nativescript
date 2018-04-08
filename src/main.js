@@ -3,8 +3,7 @@ import Vue from 'nativescript-vue';
 import router from './router';
 import directives from './directives'
 import store from './store';
-import  firebase from 'nativescript-plugin-firebase'
-
+import firebase from "nativescript-plugin-firebase"
 import './styles.scss';
 
 // Uncommment the following to see NativeScript-Vue output logs
@@ -14,23 +13,22 @@ Object.keys(directives).forEach(k => Vue.directive(k, directives[k]))
 Vue.config.silent = false;
 setTimeout(() => {
   firebase.init({
-    persist: false,
+    persist: true,
+    url: 'https://vovanda-firebase.firebaseio.com/',
     storageBucket: 'gs://vovanda-firebase.appspot.com/',
     onAuthStateChanged: (data) => {
-      console.log(JSON.stringify(data))
       if (data.loggedIn) {
-        alert('h')
+
       }
       else {
-        alert('b')
       }
     }
   }).then(
       function (instance) {
-        alert("firebase done");
+        // alert("firebase done");
       },
       function (error) {
-        alert("firebas error: " + error);
+        // alert("firebas error: " + error);
       }
   )
 },2000)

@@ -4,21 +4,29 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 import Auth from '../views/Auth'
+import Home from '../views/Home'
 
 const router = new VueRouter({
   pageRouting: true,
   routes: [
     {
-      path: '/home',
+      path: '/login',
       component: Auth,
+      meta: {
+        title: 'Auth',
+      },
+    },
+    {
+      path: '/home',
+      component: Home,
       meta: {
         title: 'Home',
       },
     },
-    {path: '*', redirect: '/home'},
+    {path: '*', redirect: '/login'},
   ],
 });
 
-router.replace('/home');
+router.replace('/login');
 
 module.exports = router;
