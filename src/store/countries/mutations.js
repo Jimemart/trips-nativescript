@@ -8,3 +8,9 @@ export const SET_COUNTRIES = (state, value) => {
     return count
   })
 }
+
+export const SET_FILTERED = (state, value) => {
+  state.filteredCountries = state.countries
+      .filter(elem => elem.country.toLowerCase().includes(value.toLowerCase()))
+      .splice(0, 5)
+}

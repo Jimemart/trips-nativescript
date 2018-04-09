@@ -1,2 +1,2 @@
-export { Header } from './shared'
+export { Header, SearchBar } from './shared'
 export * from './auth'

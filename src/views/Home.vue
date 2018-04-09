@@ -1,10 +1,13 @@
 <template>
-<StackLayout v-show="!loading">
-  <Label :text="country.country" v-for="country in countries" :key="country.country"/>
-</StackLayout>
+  <Page class="page" id="page" actionBarHidden="true" Page xmlns:au="nativescript-ui-autocomplete">
+    <vo-header :foundCountries="foundCountries" @input="filterCountries($event)">
+      <Span text="Where do you want to travel from?" slot="titleLeft" class="title"/>
+    </vo-header>
+  </Page>
 </template>
 
 <script>
+import { Header } from '../components'
 import { mapActions } from 'vuex'
 export default {
   data () {
@@ -13,13 +16,14 @@ export default {
     }
   },
   methods: {
-    ...mapActions('countries', ['getCountries'])
+    ...mapActions('countries', ['getCountries', 'filterCountries'])
+  },
+  components: {
+    voHeader: Header
   },
   computed: {
-    countries: {
-      get () {
-        console.log(this.$store.state.countries.countries[0])
-        return this.$store.state.countries.countries}
+    foundCountries: {
+      get () { return this.$store.state.countries.filteredCountries }
     }
   },
   mounted () {

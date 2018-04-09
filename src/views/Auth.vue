@@ -1,7 +1,7 @@
 <template lang="html">
   <Page class="page" id="page" actionBarHidden="true">
     <StackLayout>
-      <vo-header>
+      <vo-header :show="true">
         <Span text="Welcome!" slot="title" class="title"/>
         <Span text="Please fill your personal info" slot="subtitle" class="subtitle"/>
       </vo-header>

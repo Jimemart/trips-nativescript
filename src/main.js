@@ -6,8 +6,8 @@ import store from './store';
 import firebase from "nativescript-plugin-firebase"
 import './styles.scss';
 
-// Uncommment the following to see NativeScript-Vue output logs
-//Vue.config.silent = false;
+
+Vue.registerElement('au:RadAutoCompleteTextView', ()=> require('nativescript-ui-autocomplete').RadAutoCompleteTextView)
 Object.keys(directives).forEach(k => Vue.directive(k, directives[k]))
 
 Vue.config.silent = false;
@@ -18,7 +18,7 @@ setTimeout(() => {
     storageBucket: 'gs://vovanda-firebase.appspot.com/',
     onAuthStateChanged: (data) => {
       if (data.loggedIn) {
-
+        router.push('/home')
       }
       else {
       }
