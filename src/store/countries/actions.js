@@ -15,6 +15,9 @@ export const filterCountries = ({ commit, state }, value) => {
     if(value.length > 2){
       commit('SET_FILTERED', value)
       resolve()
+    } else {
+      commit('UNSET_FILTERED')
+      resolve()
     }
   })
 }

@@ -1,13 +1,12 @@
 <template lang="html">
   <StackLayout>
-    <TextField hint="Country" @textChange="input($event)"/>
-    <ListView for="country in foundCountries">
+    <TextField @textChange="input($event)" hint="Country" v-model="inputText"/>
+    <ListView for="country in foundCountries" @itemTap="selected($event)">
       <v-template>
         <Label :text="country.country" />
       </v-template>
     </ListView>
   </StackLayout>
-
 </template>
 
 <script>
@@ -18,9 +17,18 @@ export default {
       default: () => []
     }
   },
+  computed: {
+    inputText: {
+      get () { return this.$store.state.useful.input },
+      set(val) { this.$store.commit('useful/SET_INPUT', val)}
+    }
+  },
   methods: {
-    input(event) {
-      this.$emit('input', event.value)
+    selected(elem) {
+      this.$emit('selected',elem.item)
+    },
+    input(elem) {
+      this.$emit('input', elem.value)
     }
   }
 }

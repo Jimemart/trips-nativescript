@@ -1,8 +1,8 @@
 <template lang="html">
     <StackLayout backgroundColor="#482ea0">
-      <Label textWrap="true" height="40"  class="centered" v-if="show">
+      <Label textWrap="true" height="40"  :class="itemPosition">
         <FormattedString>
-          <slot name="title"></slot>
+          <Span :text="titleText" class="title"/>
         </FormattedString>
       </Label>
       <Label textWrap="true" height="30"  class="centered" v-if="show">
@@ -10,29 +10,39 @@
           <slot name="subtitle"></slot>
         </FormattedString>
       </Label>
-      <Label textWrap="true" class="left">
-        <FormattedString>
-          <slot name="titleLeft"></slot>
-        </FormattedString>
-      </Label>
-        <vo-search-bar
-        :foundCountries="foundCountries"
-        @input="input($event)"
-        ></vo-search-bar>
+      <vo-countries-crumb
+      v-if="searchBar"
+      :elemsPicked="selectedElems">
+      </vo-countries-crumb>
+      <vo-search-bar
+      v-if="searchBar"
+      :foundCountries="found"
+      @input="input($event)"
+      @selected="selected($event)"
+      ></vo-search-bar>
     </StackLayout>
 </template>
 
 <script>
 import SearchBar from './SearchBar.vue'
+import CountriesCrumb from '../home/CountriesCrumb'
 export default {
   props: {
     show: {type: Boolean, default: false},
-    foundCountries: { type: Array, default: () => [] }
+    found: { type: Array, default: () => [] },
+    itemPosition: { type: String, default: 'left' },
+    titleText: { type: String, default: ''},
+    searchBar: { type:Boolean, default: false},
+    selectedElems: { type: Array, default: () => [] }
   },
   components: {
-    voSearchBar: SearchBar
+    voSearchBar: SearchBar,
+    voCountriesCrumb: CountriesCrumb
   },
   methods: {
+    selected (value) {
+      this.$emit('selected', value)
+    },
     input (value) {
       this.$emit('input', value)
     }

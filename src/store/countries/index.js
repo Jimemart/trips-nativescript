@@ -6,7 +6,8 @@ export default {
   state() {
     return {
       countries: [],
-      filteredCountries: []
+      filteredCountries: [],
+      selected: []
     }
   },
   mutations,

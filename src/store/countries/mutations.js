@@ -14,3 +14,11 @@ export const SET_FILTERED = (state, value) => {
       .filter(elem => elem.country.toLowerCase().includes(value.toLowerCase()))
       .splice(0, 5)
 }
+
+export const UNSET_FILTERED = (state) => {
+  state.filteredCountries = []
+}
+
+export const SET_SELECTED = (state, value) => {
+  state.selected.push(value)
+}
